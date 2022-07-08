@@ -19,6 +19,9 @@ struct AppData {
         AppData.favouriteList.remove(at: index)
     }
     static func addFavorite(productId: Int) {
+        if AppData.favouriteList.contains(productId) {
+            return
+        }
         AppData.favouriteList.append(productId)
     }
 }

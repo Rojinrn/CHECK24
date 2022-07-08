@@ -43,6 +43,7 @@ class ProductCoordinator: BaseCoordinator {
     private func goToProductDetails(_ product: Product) {
         let productDetailsVM = ProductDetailsVM(product: product)
         let productDetailsVC = ProductDetailsVC(viewModel: productDetailsVM)
+        //TODO: impelement later
         productDetailsVC.reloadFavorite = {
             
         }

@@ -94,9 +94,9 @@ class ProductDetailsVC: UIViewController {
     @IBAction func favoriteBtnAction(_ sender: Any) {
         let id = viewModel.product.id
         if AppData.isFavorite(productId: id) {
-            AppData.deleteFavorite(productId: id)
+            viewModel.deleteFavorite()
         } else {
-            AppData.addFavorite(productId: id)
+            viewModel.addToFavorite()
         }
         
         reloadFavorite?()
