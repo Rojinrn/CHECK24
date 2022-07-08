@@ -27,6 +27,8 @@
 		20087E7128785C2400DC30ED /* ProductDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20087E7028785C2400DC30ED /* ProductDetailsVC.swift */; };
 		20087E7328785C3300DC30ED /* ProductDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20087E7228785C3300DC30ED /* ProductDetailsVM.swift */; };
 		20087E7728785F3400DC30ED /* ProductDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20087E7628785F3400DC30ED /* ProductDetailsVC.xib */; };
+		20087E7D28786D3500DC30ED /* ProductErrorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20087E7C28786D3500DC30ED /* ProductErrorTableViewCell.xib */; };
+		20087E7F28786D4D00DC30ED /* ProductErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20087E7E28786D4D00DC30ED /* ProductErrorTableViewCell.swift */; };
 		2066BB052877638300604EAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066BB042877638300604EAB /* AppDelegate.swift */; };
 		2066BB072877638300604EAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2066BB062877638300604EAB /* SceneDelegate.swift */; };
 		2066BB0E2877638400604EAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2066BB0D2877638400604EAB /* Assets.xcassets */; };
@@ -63,6 +65,8 @@
 		20087E7028785C2400DC30ED /* ProductDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsVC.swift; sourceTree = "<group>"; };
 		20087E7228785C3300DC30ED /* ProductDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsVM.swift; sourceTree = "<group>"; };
 		20087E7628785F3400DC30ED /* ProductDetailsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailsVC.xib; sourceTree = "<group>"; };
+		20087E7C28786D3500DC30ED /* ProductErrorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductErrorTableViewCell.xib; sourceTree = "<group>"; };
+		20087E7E28786D4D00DC30ED /* ProductErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductErrorTableViewCell.swift; sourceTree = "<group>"; };
 		2066BB012877638300604EAB /* Check24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Check24.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2066BB042877638300604EAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2066BB062877638300604EAB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 				20087E642878396200DC30ED /* ProductTableViewCell.swift */,
 				20087E68287855D800DC30ED /* ProductDisableTableViewCell.xib */,
 				20087E6A287855E500DC30ED /* ProductDisableTableViewCell.swift */,
+				20087E7C28786D3500DC30ED /* ProductErrorTableViewCell.xib */,
+				20087E7E28786D4D00DC30ED /* ProductErrorTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				2066BB112877638400604EAB /* LaunchScreen.storyboard in Resources */,
 				20087E632878394C00DC30ED /* ProductTableViewCell.xib in Resources */,
 				20087E4F2878271500DC30ED /* Color.xcassets in Resources */,
+				20087E7D28786D3500DC30ED /* ProductErrorTableViewCell.xib in Resources */,
 				20087E7728785F3400DC30ED /* ProductDetailsVC.xib in Resources */,
 				20087E69287855D900DC30ED /* ProductDisableTableViewCell.xib in Resources */,
 				2066BB0E2877638400604EAB /* Assets.xcassets in Resources */,
@@ -462,6 +469,7 @@
 				20087E5728782F2D00DC30ED /* ProductListResponse.swift in Sources */,
 				20087E61287838DF00DC30ED /* UITableView+Extensions.swift in Sources */,
 				20087E67287839D200DC30ED /* UIView+Storyboard.swift in Sources */,
+				20087E7F28786D4D00DC30ED /* ProductErrorTableViewCell.swift in Sources */,
 				2066BB1E287765A200604EAB /* BaseVM.swift in Sources */,
 				20087E6D2878577C00DC30ED /* ProductListTableHeaderView.swift in Sources */,
 				20087E532878283700DC30ED /* UIColor+Extension.swift in Sources */,
@@ -620,6 +628,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -629,7 +638,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -647,6 +656,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -656,7 +666,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
