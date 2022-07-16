@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ProductDetailsProtocol: AnyObject {
-    var reloadFavorite: (() -> Void)? { get set }
     var goToWebView: ((String) -> Void)? { get set }
 }
 
@@ -94,12 +93,11 @@ class ProductDetailsVC: UIViewController {
     @IBAction func favoriteBtnAction(_ sender: Any) {
         let id = viewModel.product.id
         if AppData.isFavorite(productId: id) {
-            viewModel.deleteFavorite()
+            AppData.deleteFavorite(productId: id)
         } else {
-            viewModel.addToFavorite()
+            AppData.addFavorite(productId: id)
         }
-        
-        reloadFavorite?()
+        viewModel.isFavouriteChanged.send()
         setupFavoriteButton()
     }
     

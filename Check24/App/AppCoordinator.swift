@@ -12,19 +12,15 @@ class AppCoordinator: BaseCoordinator {
     var window: UIWindow!
     
     init(window: UIWindow, navigationController: UINavigationController = UINavigationController()) {
-        //Fix Nav Bar tint issue in iOS 15.0 or later
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor(red: 5/255.0, green: 55/255.0, blue: 115/255.0, alpha: 1.000)
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        } else {
-            navigationController.navigationBar.isTranslucent = false
-            navigationController.navigationBar.barTintColor = UIColor(red: 236/255.0, green: 98/255.0, blue: 93/255.0, alpha: 1.000)
-            navigationController.navigationBar.tintColor = .white
-        }
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 5/255.0, green: 55/255.0, blue: 115/255.0, alpha: 1.000)
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backButtonAppearance.normal.titlePositionAdjustment =
+        UIOffset(horizontal: -1000, vertical: 0)
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
         super.init(navigationController: navigationController)
         self.window = window

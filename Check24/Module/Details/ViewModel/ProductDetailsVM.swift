@@ -6,19 +6,13 @@
 //
 
 import Foundation
+import Combine
 
 final class ProductDetailsVM: BaseVM {
     let product: Product
+    let isFavouriteChanged = PassthroughSubject<Void, Never>()
 
     init(product: Product) {
         self.product = product
-    }
-    
-    func deleteFavorite() {
-        AppData.deleteFavorite(productId: product.id)
-    }
-    
-    func addToFavorite() {
-        AppData.addFavorite(productId: product.id)
     }
 }

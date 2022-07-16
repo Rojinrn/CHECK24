@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 public enum ProductCategory: Int {
     case all = 0
@@ -18,9 +19,10 @@ final class ProductListVM: BaseVM {
     private let networkManager: NetworkManager
     private var allProducts = [Product]()
     private(set) var headerSection: Header?
-    @Published private(set) var displayedProductList = [Product]()
-    var isLoading = PassthroughSubject<Bool, Never>()
-    var fetchedError = PassthroughSubject<Error, Never>()
+    private(set) var displayedProductList = CurrentValueSubject<[Product], Never>([])
+    private(set) var isLoading = PassthroughSubject<Bool, Never>()
+    private(set) var fetchedError = PassthroughSubject<Error, Never>()
+    private(set) var category: ProductCategory = .all
 
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -31,6 +33,7 @@ final class ProductListVM: BaseVM {
     }
     
     private func arrangeProducts(category: ProductCategory) {
+        self.category = category
         switch category {
         case .all:
             showAllProducts()
@@ -42,20 +45,18 @@ final class ProductListVM: BaseVM {
     }
     
     private func showAllProducts() {
-        displayedProductList = allProducts
+        displayedProductList.send(allProducts)
     }
     
     private func showAvailableProducts() {
         let filtered = allProducts.filter { prodcut in
             return prodcut.available == true
         }
-        displayedProductList = filtered
+        displayedProductList.send(filtered)
     }
     
     private func showFavoriteProducts() {
-        displayedProductList = allProducts.filter({ product in
-            product.isFavourite
-        })
+        displayedProductList.send(allProducts.filter{ $0.isFavourite })
     }
 }
 //MARK: - API CALL

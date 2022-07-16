@@ -7,8 +7,10 @@
 
 import UIKit
 import SafariServices
-
+import Combine
 class ProductCoordinator: BaseCoordinator {
+
+    private var subscribers = Set<AnyCancellable>()
 
     override init(navigationController: UINavigationController) {
         super.init(navigationController: navigationController)
@@ -26,7 +28,7 @@ class ProductCoordinator: BaseCoordinator {
         let productListVM = ProductListVM(networkManager: NetworkManager())
         let productListVC = ProductListVC(viewModel: productListVM)
         productListVC.goToDetails = { product in
-            self.goToProductDetails(product)
+            self.goToProductDetails(product, listViewModel: productListVM)
         }
         
         productListVC.goToWebView = { link in
@@ -40,13 +42,15 @@ class ProductCoordinator: BaseCoordinator {
         self.navigationController.viewControllers = [productListVC]
     }
     
-    private func goToProductDetails(_ product: Product) {
+    private func goToProductDetails(_ product: Product, listViewModel: ProductListVM? = nil) {
         let productDetailsVM = ProductDetailsVM(product: product)
         let productDetailsVC = ProductDetailsVC(viewModel: productDetailsVM)
-        //TODO: impelement later
-        productDetailsVC.reloadFavorite = {
-            
-        }
+        productDetailsVM.isFavouriteChanged.sink { [weak listViewModel] _ in
+            guard let listViewModel = listViewModel else { return }
+            if listViewModel.category == .favorite {
+                listViewModel.showProduct(in: .favorite)
+            }
+        }.store(in: &subscribers)
         
         productDetailsVC.goToWebView = { link in
             guard let url = URL(string: link) else {

@@ -31,12 +31,7 @@ class ProductListVC: UIViewController, ProductListVCProtocol, LoaderPresenting {
         
         segmentedControl.addTarget(self, action: #selector(ProductListVC.indexChanged(_:)), for: .valueChanged)
         refreshControl.addTarget(self, action: #selector(ProductListVC.refreshData(_:)), for: .valueChanged)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //TODO: change this logic
-        segmentedControl.selectedSegmentIndex = 0
+        
         viewModel.showProduct()
     }
     
@@ -48,7 +43,7 @@ class ProductListVC: UIViewController, ProductListVCProtocol, LoaderPresenting {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -71,7 +66,7 @@ class ProductListVC: UIViewController, ProductListVCProtocol, LoaderPresenting {
                 
             }.store(in: &subscribers)
         
-        viewModel.$displayedProductList
+        viewModel.displayedProductList
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else {
@@ -84,15 +79,15 @@ class ProductListVC: UIViewController, ProductListVCProtocol, LoaderPresenting {
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         guard let category = ProductCategory(rawValue: sender.selectedSegmentIndex) else {
-                   fatalError("no corresponding category type for the index selected by segment control")
-               }
+            fatalError("no corresponding category type for the index selected by segment control")
+        }
         viewModel.showProduct(in: category)
     }
     
     @objc private func refreshData(_ sender: Any) {
         guard let category = ProductCategory(rawValue: segmentedControl.selectedSegmentIndex) else {
-                   fatalError("no corresponding category type for the index selected by segment control")
-               }
+            fatalError("no corresponding category type for the index selected by segment control")
+        }
         viewModel.showProduct(in: category)
     }
 }
@@ -100,25 +95,27 @@ class ProductListVC: UIViewController, ProductListVCProtocol, LoaderPresenting {
 //MARK: - UITableViewDelegate & UITableViewDataSource
 extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.displayedProductList.count
+        return viewModel.displayedProductList.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if viewModel.displayedProductList[indexPath.row].available {
+        
+        let product = viewModel.displayedProductList.value[indexPath.row]
+        if product.available {
             let cell: ProductTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(item: viewModel.displayedProductList[indexPath.row])
+            cell.configure(item: product)
             cell.selectionStyle = .none
             return cell
         } else {
             let cell: ProductDisableTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(item: viewModel.displayedProductList[indexPath.row])
+            cell.configure(item: product)
             cell.selectionStyle = .none
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let product = viewModel.displayedProductList[indexPath.row]
+        let product = viewModel.displayedProductList.value[indexPath.row]
         goToDetails?(product)
     }
     
