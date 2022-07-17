@@ -16,5 +16,5 @@ This project is for CHECK24 assignment.
 # Technical Features
 * MVVM Arhitecture
 * Coordinator Pattern
-* Using property wrapper for userdefault
+* Using property wrapper for userDefault
 * Combine
